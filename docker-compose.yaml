@@ -18,5 +18,5 @@ services:
       - "5432:5432"
     env_file: .env
     volumes:
-      - ./pgdata:/var/lib/postgresql/data
+      - ./Program Files/PostgreSQL/14/data
     restart: always
