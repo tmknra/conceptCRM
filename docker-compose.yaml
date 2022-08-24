@@ -26,9 +26,9 @@ services:
         context: ./
         dockerfile: flyway.Dockerfile
       links:
-        - db
+        - postgres
       depends_on:
-        - db
+        - postgres
       env_file: .env
       volumes:
         - ./migrations:/opt/migrations
