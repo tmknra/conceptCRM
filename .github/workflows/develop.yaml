@@ -60,6 +60,28 @@ jobs:
     runs-on: ubuntu-latest
     needs: shipping
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: copy file via ssh key
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          port: ${{ secrets.PORT }}
+          key: ${{ secrets.KEY }}
+          source: "docker-compose.yaml"
+          target: "backend/docker-compose.yaml"
+      - name: create env file
+        run: echo ${{ secrets.ENV }} > .env
+      - name: copy file via ssh key
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          port: ${{ secrets.PORT }}
+          key: ${{ secrets.KEY }}
+          source: ".env"
+          target: "backend/.env"
       - name: Executing remote command
         uses: appleboy/ssh-action@master
         with:
@@ -68,9 +90,6 @@ jobs:
           PORT: ${{ secrets.PORT }}
           KEY: ${{ secrets.SSHKEY }}
           script: |
-            mkdir backend && 
             cd backend &&
-            echo ${{ secrets.ENV }} > .env &&
-            echo ${{ secrets.COMPOSE_CONFIG_DEV }} > docker-compose.yaml &&
             docker pull ${{ env.IMAGE_NAME }}:latest && 
             docker-compose up --no-deps --force-recreate -d --build app
