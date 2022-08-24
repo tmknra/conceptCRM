@@ -38,4 +38,4 @@ jobs:
           script: |
             cd backend &&
             docker pull ${{ env.IMAGE_NAME }}:latest && 
-            docker-compose up --no-deps --force-recreate -d --build app
+            docker-compose up -d
