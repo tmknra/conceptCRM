@@ -18,5 +18,19 @@ services:
       - "5432:5432"
     env_file: .env
     volumes:
-      - ./Program Files/PostgreSQL/14/data
+      - ./db-data:/var/lib/postgresql/data
     restart: always
+  flyway:
+      image: flyway:migration
+      build:
+        context: ./
+        dockerfile: flyway.Dockerfile
+      links:
+        - db
+      depends_on:
+        - db
+      env_file: .env
+      volumes:
+        - ./migrations:/opt/migrations
+        - ./scripts:/opt/scripts
+      command: /opt/scripts/migrate.sh
