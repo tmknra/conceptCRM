@@ -1,4 +1,5 @@
 FROM gradle:jdk17-jammy AS build
+ARG JAR_FILE=*.jar
 COPY --chown=gradle:gradle . /home/gradle/src
 WORKDIR /home/gradle/src
 RUN gradle build --no-daemon
