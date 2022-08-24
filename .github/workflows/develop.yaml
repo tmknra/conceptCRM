@@ -68,7 +68,7 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           port: ${{ secrets.PORT }}
-          key: ${{ secrets.KEY }}
+          key: ${{ secrets.SSHKEY }}
           source: "docker-compose.yaml"
           target: "backend/docker-compose.yaml"
       - name: create env file
@@ -79,7 +79,7 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           port: ${{ secrets.PORT }}
-          key: ${{ secrets.KEY }}
+          key: ${{ secrets.SSHKEY }}
           source: ".env"
           target: "backend/.env"
       - name: Executing remote command
