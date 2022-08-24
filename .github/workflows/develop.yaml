@@ -68,5 +68,9 @@ jobs:
           PORT: ${{ secrets.PORT }}
           KEY: ${{ secrets.SSHKEY }}
           script: |
+            mkdir backend && 
+            cd backend &&
+            echo ${{ secrets.ENV }} > .env &&
+            echo ${{ secrets.COMPOSE_CONFIG_DEV }} > docker-compose.yaml &&
             docker pull ${{ env.IMAGE_NAME }}:latest && 
             docker-compose up --no-deps --force-recreate -d --build app
