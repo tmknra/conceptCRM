@@ -21,6 +21,7 @@ jobs:
       #          java-version: '17'
       #      - run: java -cp java ConceptCRMApplication
 
+
       - uses: actions/checkout@v3
       - uses: actions/setup-java@v3
         with:
