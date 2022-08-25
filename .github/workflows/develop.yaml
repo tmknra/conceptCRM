@@ -57,7 +57,7 @@ jobs:
   deploy:
     name: Staging deploy
     runs-on: ubuntu-latest
-#    needs: shipping
+    needs: shipping
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
