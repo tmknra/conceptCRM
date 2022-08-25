@@ -20,17 +20,17 @@ services:
     volumes:
       - ./db-data:/var/lib/postgresql/data
     restart: always
-  flyway:
-      image: flyway:migration
-      build:
-        context: ./
-        dockerfile: flyway.Dockerfile
-      links:
-        - postgres
-      depends_on:
-        - postgres
-      env_file: .env
-      volumes:
-        - ./migrations:/opt/migrations
-        - ./scripts:/opt/scripts
-      command: /opt/scripts/migrate.sh
+#  flyway:
+#      image: flyway:migration
+#      build:
+#        context: ./
+#        dockerfile: flyway.Dockerfile
+#      links:
+#        - postgres
+#      depends_on:
+#        - postgres
+#      env_file: .env
+#      volumes:
+#        - ./migrations:/opt/migrations
+#        - ./scripts:/opt/scripts
+#      command: /opt/scripts/migrate.sh
