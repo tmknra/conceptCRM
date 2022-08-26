@@ -68,7 +68,7 @@ jobs:
           username: ${{ secrets.USERNAME }}
           port: ${{ secrets.PORT }}
           key: ${{ secrets.SSHKEY }}
-          source: "docker-compose.yaml, flyway.Dockerfile"
+          source: "docker-compose.yaml"
           target: "backend"
       - name: Executing remote command
         uses: appleboy/ssh-action@master

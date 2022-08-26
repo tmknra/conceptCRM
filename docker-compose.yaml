@@ -3,8 +3,6 @@ version: '3'
 services:
   app:
     image: "tmknra/concept_crm-dev:latest"
-#    build:
-#      context: .
     container_name: ConceptCRMApplication
     depends_on:
       - db
