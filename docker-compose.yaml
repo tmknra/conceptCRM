@@ -7,18 +7,16 @@ services:
 #      context: .
     container_name: ConceptCRMApplication
     depends_on:
-      - postgres
+      - db
     ports:
       - "8081:8081"
     env_file: .env
-  postgres:
+  db:
     image: 'postgres:14-alpine'
     container_name: db
     ports:
       - "5432:5432"
     env_file: .env
-    volumes:
-      - ./db-data:/var/lib/postgresql/data
     restart: always
 #  flyway:
 #      image: flyway:migration
