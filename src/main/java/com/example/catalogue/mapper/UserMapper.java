@@ -1,10 +1,9 @@
-package com.example.authorization.mapper;
+package com.example.catalogue.mapper;
 
-import com.example.authorization.dto.UserInDto;
-import com.example.authorization.model.UsersEntity;
+import com.example.catalogue.dto.UserInDto;
+import com.example.catalogue.model.UsersEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.springframework.beans.factory.annotation.Autowired;
 
 @Mapper(componentModel = "spring")
 public abstract class UserMapper {

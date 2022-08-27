@@ -1,6 +1,6 @@
-package com.example.authorization.repository;
+package com.example.catalogue.repository;
 
-import com.example.authorization.model.UsersEntity;
+import com.example.catalogue.model.UsersEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
