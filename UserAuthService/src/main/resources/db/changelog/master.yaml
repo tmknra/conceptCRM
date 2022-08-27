@@ -1,0 +1,19 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2
+      author: roman.tumaikin
+      changes:
+        - sqlFile:
+            path: db\changelog\change_sets\user_roles.sql
+  - changeSet:
+      id: 3
+      author: roman.tumaikin
+      changes:
+        - sqlFile:
+            path: db\changelog\change_sets\fullfill_roles.sql
+  - changeSet:
+      id: 4
+      author: roman.tumaikin
+      changes:
+        - sqlFile:
+            path: db\changelog\change_sets\add_password_to_user.sql

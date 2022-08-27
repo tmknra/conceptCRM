@@ -1,3 +1,7 @@
 databaseChangeLog:
-  - includeAll:
-      path: db/changelog/change_sets
+  - changeSet:
+      id: 1
+      author: roman.tumaikin
+      changes:
+        - sqlFile:
+            path: db\changelog\change_sets\create_user_table.sql
