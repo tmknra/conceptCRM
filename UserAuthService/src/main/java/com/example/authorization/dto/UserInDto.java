@@ -1,9 +1,6 @@
 package com.example.authorization.dto;
 
-import com.example.authorization.model.RolesEntity;
 import lombok.Builder;
-
-import java.util.List;
 
 @Builder
 public class UserInDto {

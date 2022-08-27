@@ -23,13 +23,13 @@ public class UsersEntity {
     @Column
     private String password;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-            name = "user_to_roles",
-            joinColumns = {@JoinColumn(name = "user_id")},
-            inverseJoinColumns = {@JoinColumn(name = "role_id")}
-    )
-    private List<RolesEntity> roles = new ArrayList<>();
+    // @ManyToMany(fetch = FetchType.LAZY)
+    // @JoinTable(
+    //         name = "user_to_roles",
+    //         joinColumns = {@JoinColumn(name = "user_id")},
+    //         inverseJoinColumns = {@JoinColumn(name = "role_id")}
+    // )
+    // private List<RolesEntity> roles = new ArrayList<>();
 
     public UsersEntity(String username, String password) {
         this.username = username;
@@ -39,6 +39,10 @@ public class UsersEntity {
     public UsersEntity() {
     }
 
+    public UsersEntity(String username) {
+        this.username = username;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o)
@@ -46,12 +50,12 @@ public class UsersEntity {
         if (o == null || getClass() != o.getClass())
             return false;
         UsersEntity that = (UsersEntity) o;
-        return Objects.equals(id, that.id) && Objects.equals(username, that.username) && Objects.equals(password, that.password) && Objects.equals(roles, that.roles);
+        return Objects.equals(id, that.id) && Objects.equals(username, that.username) && Objects.equals(password, that.password);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, username, password, roles);
+        return Objects.hash(id, username, password);
     }
 
     public Long getId() {
@@ -66,9 +70,9 @@ public class UsersEntity {
         return this.password;
     }
 
-    public List<RolesEntity> getRoles() {
-        return this.roles;
-    }
+    // public List<RolesEntity> getRoles() {
+    //     return this.roles;
+    // }
 
     public void setId(Long id) {
         this.id = id;
@@ -82,7 +86,7 @@ public class UsersEntity {
         this.password = password;
     }
 
-    public void setRoles(List<RolesEntity> roles) {
-        this.roles = roles;
-    }
+    // public void setRoles(List<RolesEntity> roles) {
+    //     this.roles = roles;
+    // }
 }
