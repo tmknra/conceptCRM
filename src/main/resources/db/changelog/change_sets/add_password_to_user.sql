@@ -1,1 +1,2 @@
-alter table users add password varchar(255);
+
+-- alter table users add password varchar(255);
