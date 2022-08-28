@@ -6,9 +6,9 @@ import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfi
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 
-@SpringBootApplication(exclude = {SecurityAutoConfiguration.class})
+@SpringBootApplication
 @EnableJpaRepositories(basePackages = "com.example.catalogue.repository")
-// @EnableWebSecurity
+@EnableWebSecurity
 public class ConceptCRMApplication {
 
 	public static void main(String[] args) {

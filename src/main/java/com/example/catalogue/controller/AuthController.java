@@ -15,6 +15,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -44,17 +45,9 @@ public class AuthController {
 
     @PostMapping("/login")
     public String authenticateUser(@Valid @RequestBody LoginRequest request) {
-        // UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword());
-        // System.out.println(usernamePasswordAuthenticationToken);
-        // usernamePasswordAuthenticationToken.setAuthenticated(true);
-        // System.out.println(usernamePasswordAuthenticationToken);
-        // usernamePasswordAuthenticationToken.setAuthenticated(true);
-        UsernamePasswordAuthenticationToken authReq = new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword());
-        Authentication authentication = authenticationManager.authenticate(authReq);
-
-                // authenticationManager.authenticate(usernamePasswordAuthenticationToken);
+        Authentication authentication =
+                authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
         // authentication.setAuthenticated(true);
-        System.out.println(authentication);
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
         if (!authentication.isAuthenticated())

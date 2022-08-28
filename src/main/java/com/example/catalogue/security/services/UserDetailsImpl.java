@@ -9,16 +9,16 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 
 public class UserDetailsImpl implements UserDetails {
-    // private static final long serialVersionUID = 1L;
+
     private Long id;
-    private String username;
+    private final String username;
     @JsonIgnore
     private String password;
-    private Collection<? extends GrantedAuthority> authorities;
 
     public UserDetailsImpl(String username) {
         this.username = username;
     }
+
 
     public UserDetailsImpl(Long id, String username, String password) {
         this.id = id;
@@ -26,26 +26,7 @@ public class UserDetailsImpl implements UserDetails {
         this.password = password;
     }
 
-    public UserDetailsImpl(Long id, String username, String password, Collection<? extends GrantedAuthority> authorities) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
-        this.authorities = authorities;
-    }
-    // public UserDetailsImpl(Long id, String username, String password, Collection<? extends GrantedAuthority> authorities) {
-    //     this.id = id;
-    //     this.username = username;
-    //     this.password = password;
-    //     this.authorities = authorities;
-    // }
-
     public static UserDetailsImpl build(UsersEntity user) {
-        // List<RolesEntity> roles = new ArrayList<>();
-        // roles.add(new RolesEntity("admin"));
-        // user.getRoles()
-        // List<GrantedAuthority> authorities = roles.stream()
-        //         .map(role -> new SimpleGrantedAuthority(role.getName()))
-        //         .collect(Collectors.toList());
         return new UserDetailsImpl(
                 user.getId(),
                 user.getUsername(),
@@ -64,31 +45,31 @@ public class UserDetailsImpl implements UserDetails {
 
     @Override
     public String getPassword() {
-        return null;
+        return this.password;
     }
 
     @Override
     public String getUsername() {
-        return null;
+        return this.username;
     }
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 }
