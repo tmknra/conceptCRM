@@ -7,7 +7,6 @@ public class UserInDto {
 
     private String username;
     private String password;
-    // private List<RolesEntity> roles;
 
     public String getUsername() {
         return this.username;
@@ -17,10 +16,6 @@ public class UserInDto {
         return this.password;
     }
 
-    // public List<RolesEntity> getRoles() {
-    //     return roles;
-    // }
-
     public void setUsername(String username) {
         this.username = username;
     }
@@ -29,12 +24,4 @@ public class UserInDto {
         this.password = password;
     }
 
-    // public void setRoles(List<RolesEntity> roles) {
-    //     this.roles = roles;
-    // }
-
-
-    // public String toString() {
-    //     return "UserInDto(userName=" + this.getUserName() + ", password=" + this.getPassword() + ", roles=" + this.getRoles() + ")";
-    // }
 }

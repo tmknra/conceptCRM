@@ -21,19 +21,6 @@ public class UsersEntity {
     @Column
     private String password;
 
-    // @ManyToMany(fetch = FetchType.LAZY)
-    // @JoinTable(
-    //         name = "user_to_roles",
-    //         joinColumns = {@JoinColumn(name = "user_id")},
-    //         inverseJoinColumns = {@JoinColumn(name = "role_id")}
-    // )
-    // private List<RolesEntity> roles = new ArrayList<>();
-
-    public UsersEntity(String username, String password) {
-        this.username = username;
-        this.password = password;
-    }
-
     public UsersEntity() {
     }
 
@@ -68,10 +55,6 @@ public class UsersEntity {
         return this.password;
     }
 
-    // public List<RolesEntity> getRoles() {
-    //     return this.roles;
-    // }
-
     public void setId(Long id) {
         this.id = id;
     }
@@ -84,7 +67,12 @@ public class UsersEntity {
         this.password = password;
     }
 
-    // public void setRoles(List<RolesEntity> roles) {
-    //     this.roles = roles;
-    // }
+    @Override
+    public String toString() {
+        return "UsersEntity{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
 }

@@ -3,7 +3,6 @@ package com.example.catalogue.security.services;
 import com.example.catalogue.model.UsersEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
@@ -14,11 +13,6 @@ public class UserDetailsImpl implements UserDetails {
     private final String username;
     @JsonIgnore
     private String password;
-
-    public UserDetailsImpl(String username) {
-        this.username = username;
-    }
-
 
     public UserDetailsImpl(Long id, String username, String password) {
         this.id = id;

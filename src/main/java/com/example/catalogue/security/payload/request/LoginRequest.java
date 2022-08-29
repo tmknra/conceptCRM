@@ -1,4 +1,4 @@
-package com.example.catalogue.payload.request;
+package com.example.catalogue.security.payload.request;
 
 import javax.validation.constraints.NotBlank;
 

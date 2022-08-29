@@ -7,14 +7,8 @@ import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
 public abstract class UserMapper {
-    // @Autowired
-    // private RolesMapper rolesMapper;
 
     @Mapping(target = "id", ignore = true)
     public abstract UsersEntity userInDtoToUserEntity(UserInDto userInDto);
-
-    // RolesEntity rolesInDtoToRolesEntity(RolesInDto roles){
-    //     return rolesMapper.rolesInDtoToRolesEntity(roles);
-    // }
 
 }
