@@ -1,6 +1,6 @@
 package pack.concept.security.services;
 
-import pack.concept.user_service.model.UsersEntity;
+import pack.concept.security.model.UsersEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -9,10 +9,10 @@ import java.util.Collection;
 
 public class UserDetailsImpl implements UserDetails {
 
-    private Long id;
+    private final Long id;
     private final String username;
     @JsonIgnore
-    private String password;
+    private final String password;
 
     public UserDetailsImpl(Long id, String username, String password) {
         this.id = id;
@@ -66,4 +66,5 @@ public class UserDetailsImpl implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
 }

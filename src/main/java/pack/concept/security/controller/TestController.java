@@ -1,4 +1,4 @@
-package pack.concept.user_service.controller;
+package pack.concept.security.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;

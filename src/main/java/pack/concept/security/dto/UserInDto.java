@@ -1,4 +1,4 @@
-package pack.concept.user_service.dto;
+package pack.concept.security.dto;
 
 import lombok.Builder;
 

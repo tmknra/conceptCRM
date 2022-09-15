@@ -1,4 +1,4 @@
-package pack.concept.file_service.model;
+package pack.concept.calculator_service.model;
 
 import lombok.*;
 import org.hibernate.Hibernate;
@@ -7,23 +7,34 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "files")
+@Table(name = "fields")
 @Getter
 @Setter
 @ToString
 @RequiredArgsConstructor
-public class FileEntity {
+public class FieldEntity {
 
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "calculator_id", nullable = false)
+    @ToString.Exclude
+    private CalculatorEntity calculator;
+
     @Column
     private String name;
 
     @Column
-    private String link;
+    private String tooltip;
+
+    @Column
+    private String code;
+
+    @Column
+    private String type;
 
     @Override
     public boolean equals(Object o) {
@@ -31,7 +42,7 @@ public class FileEntity {
             return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o))
             return false;
-        FileEntity that = (FileEntity) o;
+        FieldEntity that = (FieldEntity) o;
         return id != null && Objects.equals(id, that.id);
     }
 

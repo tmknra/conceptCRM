@@ -1,9 +1,9 @@
-package pack.concept.user_service.mapper;
+package pack.concept.security.mapper;
 
-import pack.concept.user_service.dto.UserInDto;
-import pack.concept.user_service.model.UsersEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import pack.concept.security.dto.UserInDto;
+import pack.concept.security.model.UsersEntity;
 
 @Mapper(componentModel = "spring")
 public abstract class UserMapper {

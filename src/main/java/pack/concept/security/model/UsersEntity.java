@@ -1,12 +1,16 @@
-package pack.concept.user_service.model;
+package pack.concept.security.model;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.Collection;
 import java.util.Objects;
 
 @Entity
 @Table(name = "users")
-public class UsersEntity {
+public class UsersEntity implements UserDetails {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -26,6 +30,11 @@ public class UsersEntity {
 
     public UsersEntity(String username) {
         this.username = username;
+    }
+
+    public UsersEntity(String username, String password) {
+        this.username = username;
+        this.password = password;
     }
 
     @Override
@@ -49,6 +58,31 @@ public class UsersEntity {
 
     public @NotBlank String getUsername() {
         return this.username;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return false;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return false;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
     }
 
     public @NotBlank String getPassword() {

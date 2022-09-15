@@ -1,18 +1,19 @@
-package pack.concept.file_service.model;
+package pack.concept.calculator_service.model;
 
 import lombok.*;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "files")
+@Table(name = "calculators")
 @Getter
 @Setter
 @ToString
 @RequiredArgsConstructor
-public class FileEntity {
+public class CalculatorEntity {
 
     @Id
     @Column
@@ -22,8 +23,11 @@ public class FileEntity {
     @Column
     private String name;
 
-    @Column
-    private String link;
+    @OneToMany(mappedBy = "calculator",
+            cascade = CascadeType.PERSIST,
+            fetch = FetchType.LAZY)
+    @ToString.Exclude
+    private List<FieldEntity> fields;
 
     @Override
     public boolean equals(Object o) {
@@ -31,12 +35,17 @@ public class FileEntity {
             return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o))
             return false;
-        FileEntity that = (FileEntity) o;
+        CalculatorEntity that = (CalculatorEntity) o;
         return id != null && Objects.equals(id, that.id);
     }
 
     @Override
     public int hashCode() {
         return getClass().hashCode();
+    }
+
+    public Object calculate(List<FieldEntity> fields){
+
+        return null;
     }
 }

@@ -1,8 +1,8 @@
 package pack.concept.mapper;
 
-import pack.concept.user_service.dto.UserInDto;
-import pack.concept.user_service.mapper.UserMapper;
-import pack.concept.user_service.model.UsersEntity;
+import pack.concept.security.dto.UserInDto;
+import pack.concept.security.mapper.UserMapper;
+import pack.concept.security.model.UsersEntity;
 import javax.annotation.processing.Generated;
 import org.springframework.stereotype.Component;
 

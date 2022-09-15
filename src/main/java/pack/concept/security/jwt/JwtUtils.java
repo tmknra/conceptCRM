@@ -1,6 +1,6 @@
 package pack.concept.security.jwt;
 
-import pack.concept.user_service.model.UsersEntity;
+import pack.concept.security.model.UsersEntity;
 import pack.concept.security.services.UserDetailsImpl;
 import io.jsonwebtoken.*;
 import org.slf4j.Logger;
@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Component
@@ -21,7 +22,7 @@ public class JwtUtils {
 
     public String generateJwtToken(Authentication authentication) {
         UserDetailsImpl userPrincipal = UserDetailsImpl.build(
-                new UsersEntity(authentication.getPrincipal().toString()));
+                new UsersEntity(authentication.getName()));
 
         return Jwts.builder()
                 .setSubject((userPrincipal.getUsername()))
@@ -61,4 +62,8 @@ public class JwtUtils {
         }
         return false;
     }
+
+    // public boolean refreshToken(String token){
+    //     Claims claims = Jwts.claims().setExpiration()
+    // }
 }

@@ -1,7 +1,7 @@
 package pack.concept.security.services;
 
-import pack.concept.user_service.model.UsersEntity;
-import pack.concept.user_service.repository.UsersRepository;
+import pack.concept.security.model.UsersEntity;
+import pack.concept.security.repository.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -13,8 +13,9 @@ import java.util.Optional;
 
 @Component
 public class UserDetailsServiceImpl implements UserDetailsService {
+
     @Autowired
-    UsersRepository usersRepository;
+    private UsersRepository usersRepository;
 
     @Override
     @Transactional

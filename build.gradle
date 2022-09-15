@@ -19,6 +19,9 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 
 	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor "org.projectlombok:lombok-mapstruct-binding:0.2.0"
+	annotationProcessor 'org.projectlombok:lombok'
+
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.security:spring-security-test'
 	implementation 'org.liquibase:liquibase-core'
@@ -28,7 +31,7 @@ dependencies {
 // https://mvnrepository.com/artifact/net.jodah/expiringmap
 	implementation 'net.jodah:expiringmap:0.5.10'
 
-	annotationProcessor "org.projectlombok:lombok-mapstruct-binding:0.2.0"
+
 	implementation 'org.mapstruct:mapstruct:1.5.2.Final'
 	annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.2.Final'
 
