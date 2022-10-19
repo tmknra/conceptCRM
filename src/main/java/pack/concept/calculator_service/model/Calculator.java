@@ -8,18 +8,18 @@ import static java.lang.Math.*;
 
 @Component
 public class Calculator {
-        /*
-        1) Получаем поля калькулятора
-        2) По типу калькулятора определяем необходимый расчет
-        3) Проводим расчет и помещаем результат в мапу ключ-название, значение-результат расчета
-        * */
+    /*
+    1) Получаем поля калькулятора
+    2) По типу калькулятора определяем необходимый расчет
+    3) Проводим расчет и помещаем результат в мапу ключ-название, значение-результат расчета
+    * */
     public static ElectroAcousticOutDto calculateElectroAcoustic(ElectroAcousticInDto EAInDto) {
-        Long roomArea;
-        Long speakerPressure;
-        Long pointPower;
-        Long speakerEffectiveLength;
-        Long speakerVoicedArea = 1L;
-        Long speakersCount;
+        Long    roomArea,
+                speakerPressure,
+                pointPower,
+                speakerEffectiveLength,
+                speakersCount,
+                speakerVoicedArea = 1L;
 
         roomArea = EAInDto.getRoomLength() * EAInDto.getRoomWidth();
         speakerPressure = (long) (EAInDto.getSPL() + 10 * log(EAInDto.getSpeakerPower()));
@@ -27,17 +27,17 @@ public class Calculator {
 
         speakerEffectiveLength = (long) pow(
                 10,
-                ((speakerPressure - (EAInDto.getNoisePower() + EAInDto.getSoundPressure())) / 20));
+                (double) (speakerPressure - EAInDto.getNoisePower() - EAInDto.getSoundPressure()) / 20);
 
         if (EAInDto.getSpeakerType() == 1L) {
             speakerVoicedArea = (long) (PI * pow(
-                    ((EAInDto.getCeilingHeight() - 1.5) * tan(EAInDto.getODW() / 2))
+                    ((EAInDto.getCeilingHeight() - 1.5) * tan((double) EAInDto.getODW() / 2))
                     , 2));
         } else if (EAInDto.getSpeakerType() == 2L) {
             speakerVoicedArea = (long) (EAInDto.getODW() * (PI * speakerEffectiveLength * speakerEffectiveLength) / 360);
         } else if (EAInDto.getSpeakerType() == 3L) {
             speakerVoicedArea = (long)
-                    (PI * speakerEffectiveLength / 2 * speakerEffectiveLength / 2 * tan(EAInDto.getODW() / 2));
+                    (PI * speakerEffectiveLength / 2 * speakerEffectiveLength / 2 * tan((double) EAInDto.getODW() / 2));
         }
         speakersCount = roomArea / speakerVoicedArea;
 
@@ -51,6 +51,6 @@ public class Calculator {
                 .build();
     }
 
-    public static void calculateWireSection(){
-    };
+    public static void calculateWireSection() {
+    }
 }
