@@ -1,6 +1,10 @@
 package pack.concept.security.jwt;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import pack.concept.security.dto.TokenOutDto;
 import pack.concept.security.model.UsersEntity;
+import pack.concept.security.payload.response.MessageResponse;
 import pack.concept.security.services.UserDetailsImpl;
 import io.jsonwebtoken.*;
 import org.slf4j.Logger;
@@ -63,7 +67,17 @@ public class JwtUtils {
         return false;
     }
 
-    // public boolean refreshToken(String token){
-    //     Claims claims = Jwts.claims().setExpiration()
-    // }
+    public ResponseEntity<?> refreshToken(String token) {
+        if (validateJwtToken(token)) {
+            String subject = Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody().getSubject();
+            String refreshToken = Jwts.builder()
+                    .setSubject(subject)
+                    .setIssuedAt(new Date())
+                    .setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))
+                    .signWith(SignatureAlgorithm.HS512, jwtSecret)
+                    .compact();
+            return ResponseEntity.ok().body(new TokenOutDto(refreshToken));
+        }
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new MessageResponse("Error: Invalid JWT"));
+    }
 }

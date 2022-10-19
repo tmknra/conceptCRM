@@ -1,13 +1,23 @@
 package pack.concept.calculator_service.controller;
 
+import pack.concept.calculator_service.dto.in.ElectroAcousticInDto;
 import pack.concept.calculator_service.dto.out.CalculatorOutDto;
+import pack.concept.calculator_service.dto.out.ElectroAcousticOutDto;
 import pack.concept.calculator_service.model.CalculatorEntity;
 import pack.concept.calculator_service.payload.request.CalculatorRequest;
 import pack.concept.calculator_service.payload.response.CalculatorResponse;
+import pack.concept.calculator_service.service.CalculatorService;
 
 import java.util.List;
 
 public class CalculatorControllerImpl implements CalculatorController{
+
+    private CalculatorService calculatorService;
+
+    public CalculatorControllerImpl(CalculatorService calculatorService) {
+        this.calculatorService = calculatorService;
+    }
+
     @Override
     public List<CalculatorEntity> getAllCalculators() {
         return null;
@@ -19,7 +29,12 @@ public class CalculatorControllerImpl implements CalculatorController{
     }
 
     @Override
-    public CalculatorResponse calculate(CalculatorRequest request) {
+    public CalculatorResponse calculate(Long id, CalculatorRequest request) {
         return null;
+    }
+
+    @Override
+    public ElectroAcousticOutDto calculateElectroAcoustic(ElectroAcousticInDto electroAcousticInDto) {
+        return calculatorService.calculateElectroAcoustic(electroAcousticInDto);
     }
 }

@@ -1,8 +1,12 @@
 package pack.concept.calculator_service.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import pack.concept.calculator_service.dto.in.ElectroAcousticInDto;
 import pack.concept.calculator_service.dto.out.CalculatorOutDto;
+import pack.concept.calculator_service.dto.out.ElectroAcousticOutDto;
 import pack.concept.calculator_service.mapper.CalculatorMapper;
+import pack.concept.calculator_service.model.Calculator;
 import pack.concept.calculator_service.model.CalculatorEntity;
 import pack.concept.calculator_service.payload.request.CalculatorRequest;
 import pack.concept.calculator_service.payload.response.CalculatorResponse;
@@ -35,6 +39,11 @@ public class CalculatorServiceImpl implements CalculatorService {
     @Override
     public CalculatorResponse calculateResult(CalculatorRequest request) {
         return calculate(request);
+    }
+
+    @Override
+    public ElectroAcousticOutDto calculateElectroAcoustic(ElectroAcousticInDto electroAcousticInDto) {
+        return Calculator.calculateElectroAcoustic(electroAcousticInDto);
     }
 
     private CalculatorResponse calculate(CalculatorRequest request) {

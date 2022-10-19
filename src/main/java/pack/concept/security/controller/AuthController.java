@@ -1,27 +1,9 @@
 package pack.concept.security.controller;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.security.authentication.AnonymousAuthenticationToken;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import pack.concept.security.dto.TokenOutDto;
-import pack.concept.security.dto.UserInDto;
-import pack.concept.security.jwt.AuthTokenFilter;
-import pack.concept.security.mapper.UserMapper;
-import pack.concept.security.model.UsersEntity;
-import pack.concept.security.exception.InvalidTokenRequestException;
-import pack.concept.security.payload.request.JwtCheckRequest;
-import pack.concept.security.payload.request.LoginRequest;
-import pack.concept.security.payload.response.MessageResponse;
-import pack.concept.security.repository.UsersRepository;
-import pack.concept.security.jwt.JwtUtils;
-import pack.concept.security.payload.request.LogOutRequest;
-import pack.concept.security.payload.event.OnUserLogoutSuccessEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -29,18 +11,21 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
-import pack.concept.security.services.UserDetailsImpl;
+import pack.concept.security.dto.TokenOutDto;
+import pack.concept.security.dto.UserInDto;
+import pack.concept.security.jwt.JwtUtils;
+import pack.concept.security.mapper.UserMapper;
+import pack.concept.security.model.UsersEntity;
+import pack.concept.security.payload.event.OnUserLogoutSuccessEvent;
+import pack.concept.security.payload.request.LoginRequest;
+import pack.concept.security.payload.response.MessageResponse;
+import pack.concept.security.repository.UsersRepository;
 
-import javax.management.MalformedObjectNameException;
-import javax.management.ObjectName;
 import javax.validation.Valid;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
-import static java.lang.Boolean.*;
+import static java.lang.Boolean.TRUE;
 import static org.springframework.http.HttpStatus.UNAUTHORIZED;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -99,8 +84,8 @@ public class AuthController {
 
     @PostMapping("/check")
     public ResponseEntity<?> checkToken(@RequestHeader(HttpHeaders.AUTHORIZATION) HttpHeaders headers) {
+        // TODO: validates incorrect jwt - need refactor
         String token = String.join("", Objects.requireNonNull(headers.get("authorization")));
-
         if (!jwtUtils.validateJwtToken(token)) {
             return ResponseEntity.badRequest().body(new MessageResponse("Error: Invalid JWT signature"));
         }
@@ -119,5 +104,11 @@ public class AuthController {
         user.setPassword(encoder.encode(user.getPassword()));
         usersRepository.save(user);
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+    }
+
+    @PostMapping("/token/refresh")
+    public ResponseEntity<?> refreshToken(@RequestHeader(HttpHeaders.AUTHORIZATION) HttpHeaders headers) {
+        String token = String.join("", Objects.requireNonNull(headers.get("authorization")));
+        return jwtUtils.refreshToken(token);
     }
 }

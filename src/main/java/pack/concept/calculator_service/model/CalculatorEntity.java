@@ -26,9 +26,10 @@ public class CalculatorEntity {
     @OneToMany(mappedBy = "calculator",
             cascade = CascadeType.PERSIST,
             fetch = FetchType.LAZY)
-    @ToString.Exclude
     private List<FieldEntity> fields;
 
+    @Column(name = "icon")
+    private String icon;
     @Override
     public boolean equals(Object o) {
         if (this == o)
@@ -44,8 +45,4 @@ public class CalculatorEntity {
         return getClass().hashCode();
     }
 
-    public Object calculate(List<FieldEntity> fields){
-
-        return null;
-    }
 }
