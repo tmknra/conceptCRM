@@ -1,5 +1,6 @@
 package pack.concept.calculator_service.controller;
 
+import org.springframework.web.bind.annotation.RestController;
 import pack.concept.calculator_service.dto.in.ElectroAcousticInDto;
 import pack.concept.calculator_service.dto.out.CalculatorOutDto;
 import pack.concept.calculator_service.dto.out.ElectroAcousticOutDto;
@@ -10,6 +11,7 @@ import pack.concept.calculator_service.service.CalculatorService;
 
 import java.util.List;
 
+@RestController
 public class CalculatorControllerImpl implements CalculatorController{
 
     private CalculatorService calculatorService;

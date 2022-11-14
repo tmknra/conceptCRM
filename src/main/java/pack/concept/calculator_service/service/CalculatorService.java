@@ -12,7 +12,6 @@ import pack.concept.calculator_service.payload.response.CalculatorResponse;
 
 import java.util.List;
 
-@Service
 public interface CalculatorService {
 
     List<CalculatorEntity> getAllCalculators();

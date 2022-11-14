@@ -11,7 +11,6 @@ import pack.concept.calculator_service.payload.response.CalculatorResponse;
 
 import java.util.List;
 
-@RestController
 @RequestMapping("/calc")
 public interface CalculatorController {
 

@@ -22,7 +22,7 @@ public class Calculator {
                 speakerVoicedArea = 1L;
 
         roomArea = EAInDto.getRoomLength() * EAInDto.getRoomWidth();
-        speakerPressure = (long) (EAInDto.getSPL() + 10 * log(EAInDto.getSpeakerPower()));
+        speakerPressure = (long) (EAInDto.getSpl() + 10 * log(EAInDto.getSpeakerPower()));
         pointPower = (long) (speakerPressure - 20 * log(EAInDto.getCalculatedPointDistance()));
 
         speakerEffectiveLength = (long) pow(
@@ -31,13 +31,13 @@ public class Calculator {
 
         if (EAInDto.getSpeakerType() == 1L) {
             speakerVoicedArea = (long) (PI * pow(
-                    ((EAInDto.getCeilingHeight() - 1.5) * tan((double) EAInDto.getODW() / 2))
+                    ((EAInDto.getCeilingHeight() - 1.5) * tan((double) EAInDto.getOdw() / 2))
                     , 2));
         } else if (EAInDto.getSpeakerType() == 2L) {
-            speakerVoicedArea = (long) (EAInDto.getODW() * (PI * speakerEffectiveLength * speakerEffectiveLength) / 360);
+            speakerVoicedArea = (long) (EAInDto.getOdw() * (PI * speakerEffectiveLength * speakerEffectiveLength) / 360);
         } else if (EAInDto.getSpeakerType() == 3L) {
             speakerVoicedArea = (long)
-                    (PI * speakerEffectiveLength / 2 * speakerEffectiveLength / 2 * tan((double) EAInDto.getODW() / 2));
+                    (PI * speakerEffectiveLength / 2 * speakerEffectiveLength / 2 * tan((double) EAInDto.getOdw() / 2));
         }
         speakersCount = roomArea / speakerVoicedArea;
 

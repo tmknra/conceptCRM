@@ -2,6 +2,7 @@ package pack.concept.calculator_service.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 import pack.concept.calculator_service.dto.in.ElectroAcousticInDto;
 import pack.concept.calculator_service.dto.out.CalculatorOutDto;
 import pack.concept.calculator_service.dto.out.ElectroAcousticOutDto;
@@ -16,6 +17,7 @@ import pack.concept.calculator_service.service.CalculatorService;
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class CalculatorServiceImpl implements CalculatorService {
 
     @Autowired
