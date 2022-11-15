@@ -51,6 +51,7 @@ public class WebSecurityConfig {
                 .authorizeRequests().antMatchers("/auth/**").permitAll()
                 .antMatchers("/test/**").permitAll()
                 .antMatchers("/calc/**").permitAll()
+                .antMatchers("https://dev.serjleodev.ru/**").permitAll()
                 .anyRequest().authenticated();
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
         return http.build();
