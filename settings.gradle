@@ -1,1 +1,3 @@
-rootProject.name = 'catalogue'
+rootProject.name = 'conceptCRM'
+include 'UserAuthService'
+

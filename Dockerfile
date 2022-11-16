@@ -1,4 +1,5 @@
 FROM gradle:jdk17-jammy AS build
+ARG JAR_FILE=*.jar
 COPY --chown=gradle:gradle . /home/gradle/src
 WORKDIR /home/gradle/src
 RUN gradle build --no-daemon
@@ -9,7 +10,8 @@ EXPOSE 8080
 
 RUN mkdir /app
 
-COPY --from=build /home/gradle/src/build/libs/*.jar /app/spring-boot-application.jar
+COPY --from=build /home/gradle/src/build /app
+COPY --from=build /home/gradle/src/build/libs/*.jar /app/libs/spring-boot-application.jar
 
-ENTRYPOINT ["java", "-XX:+UnlockExperimentalVMOptions", "-Djava.security.egd=file:/dev/./urandom","-jar","/app/spring-boot-application.jar"]
+ENTRYPOINT ["java", "-XX:+UnlockExperimentalVMOptions", "-Djava.security.egd=file:/dev/./urandom","-jar","/app/libs/spring-boot-application.jar"]
 
