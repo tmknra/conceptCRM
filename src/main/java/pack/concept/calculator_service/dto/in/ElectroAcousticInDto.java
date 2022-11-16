@@ -9,7 +9,7 @@ public class ElectroAcousticInDto {
     private Long speakerPower;
     /*ШДН - ширина диаграммы направленности*/
     private Long odw;
-    private Long speakerType;
+    private Integer speakerType;
     /*уровень шума в помещении*/
     private Long noisePower;
 
