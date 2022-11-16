@@ -26,5 +26,5 @@ public interface CalculatorController {
     CalculatorResponse calculate(@PathVariable Long id, @RequestBody CalculatorRequest request);
 
     @PostMapping("/ea")
-    ArrayList<ResultValue> calculateElectroAcoustic(@RequestBody ElectroAcousticInDto electroAcousticInDto);
+    ResponseEntity<ArrayList<ResultValue>> calculateElectroAcoustic(@RequestBody ElectroAcousticInDto electroAcousticInDto);
 }
