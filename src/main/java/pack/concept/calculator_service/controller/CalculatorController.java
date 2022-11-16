@@ -23,6 +23,6 @@ public interface CalculatorController {
     @PostMapping("/{id}/calculate")
     CalculatorResponse calculate(@PathVariable Long id, @RequestBody CalculatorRequest request);
 
-    @GetMapping("/ea")
+    @PostMapping("/ea")
     ElectroAcousticOutDto calculateElectroAcoustic(@RequestBody ElectroAcousticInDto electroAcousticInDto);
 }
