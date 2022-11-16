@@ -3,6 +3,10 @@ package pack.concept.calculator_service.model;
 import org.springframework.stereotype.Component;
 import pack.concept.calculator_service.dto.in.ElectroAcousticInDto;
 import pack.concept.calculator_service.dto.out.ElectroAcousticOutDto;
+import pack.concept.calculator_service.dto.out.ResultValue;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import static java.lang.Math.*;
 
@@ -13,7 +17,8 @@ public class Calculator {
     2) По типу калькулятора определяем необходимый расчет
     3) Проводим расчет и помещаем результат в мапу ключ-название, значение-результат расчета
     * */
-    public static ElectroAcousticOutDto calculateElectroAcoustic(ElectroAcousticInDto EAInDto) {
+    public static ArrayList<ResultValue> calculateElectroAcoustic(ElectroAcousticInDto EAInDto) {
+        ArrayList<ResultValue> result = new ArrayList<>();
         Long    roomArea,
                 speakerPressure,
                 pointPower,
@@ -41,14 +46,22 @@ public class Calculator {
         }
         speakersCount = roomArea / speakerVoicedArea;
 
-        return ElectroAcousticOutDto.builder()
-                .roomArea(roomArea)
-                .speakerPressure(speakerPressure)
-                .pointPower(pointPower)
-                .speakerEffectiveLength(speakerEffectiveLength)
-                .speakerVoicedArea(speakerVoicedArea)
-                .speakersCount(speakersCount)
-                .build();
+        // return ElectroAcousticOutDto.builder()
+        //         .roomArea(roomArea)
+        //         .speakerPressure(speakerPressure)
+        //         .pointPower(pointPower)
+        //         .speakerEffectiveLength(speakerEffectiveLength)
+        //         .speakerVoicedArea(speakerVoicedArea)
+        //         .speakersCount(speakersCount)
+        //         .build();
+        result.add(new ResultValue("roomArea", roomArea));
+        result.add(new ResultValue("speakerPressure", speakerPressure));
+        result.add(new ResultValue("pointPower", pointPower));
+        result.add(new ResultValue("speakerEffectiveLength", speakerEffectiveLength));
+        result.add(new ResultValue("speakerVoicedArea", speakerVoicedArea));
+        result.add(new ResultValue("speakersCount", speakersCount));
+
+        return result;
     }
 
     public static void calculateWireSection() {

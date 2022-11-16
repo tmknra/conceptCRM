@@ -5,10 +5,12 @@ import org.springframework.web.bind.annotation.*;
 import pack.concept.calculator_service.dto.in.ElectroAcousticInDto;
 import pack.concept.calculator_service.dto.out.CalculatorOutDto;
 import pack.concept.calculator_service.dto.out.ElectroAcousticOutDto;
+import pack.concept.calculator_service.dto.out.ResultValue;
 import pack.concept.calculator_service.model.CalculatorEntity;
 import pack.concept.calculator_service.payload.request.CalculatorRequest;
 import pack.concept.calculator_service.payload.response.CalculatorResponse;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RequestMapping("/calc")
@@ -24,5 +26,5 @@ public interface CalculatorController {
     CalculatorResponse calculate(@PathVariable Long id, @RequestBody CalculatorRequest request);
 
     @PostMapping("/ea")
-    ElectroAcousticOutDto calculateElectroAcoustic(@RequestBody ElectroAcousticInDto electroAcousticInDto);
+    ArrayList<ResultValue> calculateElectroAcoustic(@RequestBody ElectroAcousticInDto electroAcousticInDto);
 }

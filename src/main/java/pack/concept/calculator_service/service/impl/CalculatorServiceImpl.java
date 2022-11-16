@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import pack.concept.calculator_service.dto.in.ElectroAcousticInDto;
 import pack.concept.calculator_service.dto.out.CalculatorOutDto;
 import pack.concept.calculator_service.dto.out.ElectroAcousticOutDto;
+import pack.concept.calculator_service.dto.out.ResultValue;
 import pack.concept.calculator_service.mapper.CalculatorMapper;
 import pack.concept.calculator_service.model.Calculator;
 import pack.concept.calculator_service.model.CalculatorEntity;
@@ -14,6 +15,7 @@ import pack.concept.calculator_service.payload.response.CalculatorResponse;
 import pack.concept.calculator_service.repository.CalculatorRepository;
 import pack.concept.calculator_service.service.CalculatorService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -44,7 +46,7 @@ public class CalculatorServiceImpl implements CalculatorService {
     }
 
     @Override
-    public ElectroAcousticOutDto calculateElectroAcoustic(ElectroAcousticInDto electroAcousticInDto) {
+    public ArrayList<ResultValue> calculateElectroAcoustic(ElectroAcousticInDto electroAcousticInDto) {
         return Calculator.calculateElectroAcoustic(electroAcousticInDto);
     }
 
