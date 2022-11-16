@@ -1,4 +1,4 @@
-package pack.concept.file_service.reposiroty;
+package pack.concept.file_service.storage;
 
 import pack.concept.file_service.model.FileEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
