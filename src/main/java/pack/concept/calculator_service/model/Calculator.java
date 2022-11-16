@@ -5,6 +5,8 @@ import pack.concept.calculator_service.dto.in.ElectroAcousticInDto;
 import pack.concept.calculator_service.dto.in.WireSectionInDto;
 import pack.concept.calculator_service.dto.out.ResultValue;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.ArrayList;
 
 import static java.lang.Math.*;
@@ -18,31 +20,32 @@ public class Calculator {
     * */
     public static ArrayList<ResultValue> calculate(ElectroAcousticInDto EAInDto) {
         ArrayList<ResultValue> result = new ArrayList<>();
-        Long    roomArea,
-                speakerPressure,
+        Long roomArea,
                 pointPower,
+                speakersCount;
+        Double speakerPressure,
                 speakerEffectiveLength,
-                speakersCount,
-                speakerVoicedArea = 1L;
+                speakerVoicedArea = 1.0;
 
         roomArea = EAInDto.getRoomLength() * EAInDto.getRoomWidth();
-        speakerPressure = (long) (EAInDto.getSpl() + 10 * log(EAInDto.getSpeakerPower()));
-        pointPower = (long) (speakerPressure - 20 * log(EAInDto.getCalculatedPointDistance()));
-        speakerEffectiveLength = (long) pow(
-                10,
-                (double) (speakerPressure - EAInDto.getNoisePower() - EAInDto.getSoundPressure()) / 20);
+        speakerPressure = EAInDto.getSpl() + 10 *
+                log10(EAInDto.getSpeakerPower());
+        pointPower = (long) Math.ceil(speakerPressure - 20 * log10(EAInDto.getCalculatedPointDistance()));
 
+        double p = speakerPressure - (EAInDto.getNoisePower() + EAInDto.getSoundPressure());
+        speakerEffectiveLength = pow(10, p / 20);
+        System.out.println(speakerEffectiveLength);
         switch (EAInDto.getSpeakerType()) {
-            case 1 -> speakerVoicedArea = (long) (PI * pow(
-                    ((EAInDto.getCeilingHeight() - 1.5) * tan((double) EAInDto.getOdw() / 2))
-                    , 2));
-            case 2 -> speakerVoicedArea = (long)
-                    (EAInDto.getOdw() * (PI * speakerEffectiveLength * speakerEffectiveLength) / 360);
-            case 3 -> speakerVoicedArea = (long)
-                    (PI * speakerEffectiveLength / 2 * speakerEffectiveLength / 2 * tan((double) EAInDto.getOdw() / 2));
+            case 1 -> speakerVoicedArea = (3.14 *
+                    ((EAInDto.getCeilingHeight() - 1.5) * tan(Math.toRadians((double) EAInDto.getOdw() / 2))) *
+                    ((EAInDto.getCeilingHeight() - 1.5) * tan(Math.toRadians((double) EAInDto.getOdw() / 2))));
+            case 2 -> speakerVoicedArea =
+                    (EAInDto.getOdw() * (3.14 * speakerEffectiveLength * speakerEffectiveLength) / 360);
+            case 3 -> speakerVoicedArea =
+                    (PI * speakerEffectiveLength / 2 * speakerEffectiveLength / 2 *
+                            tan(Math.toRadians((double) EAInDto.getOdw() / 2)));
         }
-
-        speakersCount = roomArea / speakerVoicedArea;
+        speakersCount = (long) Math.ceil((double) roomArea / speakerVoicedArea);
 
         // return ElectroAcousticOutDto.builder()
         //         .roomArea(roomArea)
@@ -53,10 +56,13 @@ public class Calculator {
         //         .speakersCount(speakersCount)
         //         .build();
         result.add(new ResultValue("Площадь помещения (S, м2)", roomArea));
-        result.add(new ResultValue("Звуковое давление громкоговорителя (P, Дб)", speakerPressure));
+        result.add(new ResultValue("Звуковое давление громкоговорителя (P, Дб)",
+                ((Double) Math.ceil(speakerPressure)).longValue()));
         result.add(new ResultValue("Звуковое давление в расчетной точке (P, Дб)", pointPower));
-        result.add(new ResultValue("Эффективная дальность громкоговорителя (L, м)", speakerEffectiveLength));
-        result.add(new ResultValue("Площадь озвучиваемая громкоговорителем (S, м2)", speakerVoicedArea));
+        result.add(new ResultValue("Эффективная дальность громкоговорителя (L, м)",
+                speakerEffectiveLength.longValue()));
+        result.add(new ResultValue("Площадь озвучиваемая громкоговорителем (S, м2)",
+                ((Double) Math.ceil(speakerVoicedArea)).longValue()));
         result.add(new ResultValue("Требуемое количество громкоговорителей", speakersCount));
 
         return result;
